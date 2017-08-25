@@ -14,7 +14,7 @@ $hmacKey         = $_ENV['ADYEN_HMAC'];
  */
 
 $params = array(
-    "merchantReference" => "SKINTEST-1435226439255",
+    "merchantReference" => uniqid('SKINTEST'),
     "merchantAccount"   =>  $merchantAccount,
     "currencyCode"      => "GBP",
     "paymentAmount"     => "2000",
@@ -82,6 +82,11 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
         ?>
         <input type="submit" value="Submit" />
     </form>
+    <div>
+        <textarea style="height:600px;width:500px">
+            <?php var_dump($params); ?>
+        </textarea>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
