@@ -3,6 +3,8 @@
  This PHP code provides a payment form for the Adyen Hosted Payment Pages
  */
 
+require_once 'vendor/thomaslorentsen/adyen-hpp-hmac/src/hmac.php';
+
 $skinCode        = $_ENV['ADYEN_SKINCODE'];
 $merchantAccount = $_ENV['ADYEN_MERCHANT'];
 $hmacKey         = $_ENV['ADYEN_HMAC'];
@@ -20,7 +22,7 @@ $params = array(
     "shipBeforeDate"    => "2017-07-01",
     "shopperLocale"     => "en_GB",
     "skinCode"          => $skinCode,
-    "brandCode"         => "",
+    "brandCode"         => "paypal_ecs",
     "shopperEmail"      => "test@adyen.com",
     "shopperReference"  => "123",
 
@@ -71,31 +73,38 @@ $signData = implode(":",array_map($escapeval,array_merge(array_keys($params), ar
 
 // base64-encode the binary result of the HMAC computation
 $merchantSig = base64_encode(hash_hmac('sha256',$signData,pack("H*" , $hmacKey),true));
-$params["merchantSig"] = $merchantSig;
+
+$params["merchantSig"] = adyen_hmac($hmacKey, $params);
 
 ?>
-
-
-<!-- Complete submission form -->
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Adyen Payment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 <body>
-<form name="adyenForm" action="https://test.adyen.com/hpp/select.shtml" method="post">
+<div class="container">
+    <h1>PayPal Express Checkout</h1>
+    <form name="adyenForm" action="https://test.adyen.com/hpp/skipDetails.shtml" method="post">
+        <?php
+        foreach ($params as $key => $value){
+            echo '<input type="hidden" name="' .htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8').
+                '" value="' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . '" />' ."\n" ;
+        }
+        ?>
+        <input type="submit" value="Submit" />
+    </form>
+</div>
 
-    <?php
-    foreach ($params as $key => $value){
-        echo '        <input type="hidden" name="' .htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8').
-            '" value="' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . '" />' ."\n" ;
-    }
-    ?>
-    <input type="submit" value="Submit" />
-</form>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </body>
 </html>
 <!-- Adyen PayPal Express Checkout is running -->

@@ -1,14 +1,22 @@
 {
-    "name": "thomaslorentsen/adyen-paypal-express-checkout",
-    "description": "A proof of concept for Adyen Paypal Express Checkout",
-    "type": "project",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Tom Lorentsen",
-            "email": "tom@thomaslorentsen.co.uk"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {}
+  "name": "thomaslorentsen/adyen-paypal-express-checkout",
+  "description": "A proof of concept for Adyen Paypal Express Checkout",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tom Lorentsen",
+      "email": "tom@thomaslorentsen.co.uk"
+    }
+  ],
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/thomaslorentsen/adyen-hpp-hmac"
+    }
+  ],
+  "require": {
+    "thomaslorentsen/adyen-hpp-hmac": "dev-master"
+  }
 }

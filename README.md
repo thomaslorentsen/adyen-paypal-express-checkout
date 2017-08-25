@@ -6,6 +6,7 @@ Adyen PayPal Express Checkout Proof of Concept
 ```bash
 docker build -t adyen-paypal-express-checkout .
 ```
+```bash
 docker run \
   -d -p 127.0.0.1:4747:80 \
   --name adyen-paypal-express-checkout \
