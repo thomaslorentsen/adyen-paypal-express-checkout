@@ -14,7 +14,7 @@ $hmacKey         = $_ENV['ADYEN_HMAC'];
  */
 
 $params = array(
-    "merchantReference" => uniqid('SKINTEST'),
+    "merchantReference" => uniqid('SKINTEST-'),
     "merchantAccount"   =>  $merchantAccount,
     "currencyCode"      => "GBP",
     "paymentAmount"     => "2000",
