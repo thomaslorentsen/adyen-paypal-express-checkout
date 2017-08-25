@@ -1,0 +1,20 @@
+---
+language: python
+python:
+  - 2.7
+
+services:
+  - docker
+
+before_script:
+  # Build docker image
+  - docker build -t adyen-paypal-express-checkout .
+  - docker run -d -p 127.0.0.1:80:80 --name adyen-paypal-express-checkout adyen-paypal-express-checkout
+
+script:
+  - wget --quiet 127.0.0.1:80
+  - docker ps | grep -q adyen-paypal-express-checkout
+
+after_failure:
+  - docker logs adyen-paypal-express-checkout
+...
