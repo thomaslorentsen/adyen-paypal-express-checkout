@@ -73,15 +73,18 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
 <body>
 <div class="container">
     <h1>PayPal Express Checkout</h1>
-    <form name="adyenForm" action="https://test.adyen.com/hpp/skipDetails.shtml" method="post">
-        <?php
-        foreach ($params as $key => $value){
-            echo '<input type="hidden" name="' .htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8').
-                '" value="' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . '" />' ."\n" ;
-        }
-        ?>
-        <input type="submit" value="Submit" />
-    </form>
+    <div>
+        <form name="adyenForm" action="https://test.adyen.com/hpp/skipDetails.shtml" method="post">
+            <?php
+            foreach ($params as $key => $value){
+                echo '<input type="hidden" name="' .htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8').
+                    '" value="' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . '" />' ."\n" ;
+            }
+            ?>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+    <h2>Payload:</h2>
     <div>
         <textarea style="height:600px;width:500px">
             <?php var_dump($params); ?>
