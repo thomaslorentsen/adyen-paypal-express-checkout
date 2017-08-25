@@ -13,6 +13,7 @@ before_script:
 
 script:
   - wget --quiet 127.0.0.1:80
+  - grep "Adyen PayPal Express Checkout is running" index.html
   - docker ps | grep -q adyen-paypal-express-checkout
 
 after_failure:
