@@ -3,7 +3,9 @@
  This PHP code provides a payment form for the Adyen Hosted Payment Pages
  */
 
-include "config.php";
+$skinCode        = $_ENV['ADYEN_SKINCODE'];
+$merchantAccount = $_ENV['ADYEN_MERCHANT'];
+$hmacKey         = $_ENV['ADYEN_HMAC'];
 
 /*
  payment-specific details
