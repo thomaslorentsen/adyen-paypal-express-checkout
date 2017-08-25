@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/thomaslorentsen/adyen-paypal-express-checkout.svg?branch=master)](https://travis-ci.org/thomaslorentsen/adyen-paypal-express-checkout)
+[![Docker Build](https://img.shields.io/docker/automated/imacatlol/adyen-paypal-express-checkout.svg)](https://hub.docker.com/r/imacatlol/adyen-paypal-express-checkout/)
+[![Docker pulls](https://img.shields.io/docker/pulls/imacatlol/adyen-paypal-express-checkout.svg)](https://hub.docker.com/r/imacatlol/adyen-paypal-express-checkout/)
+
 # adyen-paypal-express-checkout
 Adyen PayPal Express Checkout Proof of Concept
 

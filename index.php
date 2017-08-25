@@ -16,10 +16,10 @@ $hmacKey         = $_ENV['ADYEN_HMAC'];
 $params = array(
     "merchantReference" => "SKINTEST-1435226439255",
     "merchantAccount"   =>  $merchantAccount,
-    "currencyCode"      => "EUR",
-    "paymentAmount"     => "199",
+    "currencyCode"      => "GBP",
+    "paymentAmount"     => "2000",
     "sessionValidity"   => "2020-12-25T10:31:06Z",
-    "shipBeforeDate"    => "2017-07-01",
+    "shipBeforeDate"    => "2017-08-25",
     "shopperLocale"     => "en_GB",
     "skinCode"          => $skinCode,
     "brandCode"         => "paypal_ecs",
@@ -55,24 +55,6 @@ $params = array(
     "deliveryAddressType" => "",
 
 );
-
-/*
- process fields
- */
-
-// The character escape function
-$escapeval = function($val) {
-    return str_replace(':','\\:',str_replace('\\','\\\\',$val));
-};
-
-// Sort the array by key using SORT_STRING order
-ksort($params, SORT_STRING);
-
-// Generate the signing data string
-$signData = implode(":",array_map($escapeval,array_merge(array_keys($params), array_values($params))));
-
-// base64-encode the binary result of the HMAC computation
-$merchantSig = base64_encode(hash_hmac('sha256',$signData,pack("H*" , $hmacKey),true));
 
 $params["merchantSig"] = adyen_hmac($hmacKey, $params);
 
