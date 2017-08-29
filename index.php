@@ -12,7 +12,7 @@ $hmacKey         = $_ENV['ADYEN_HMAC'];
 
 // Optional Values
 $currencyCode = isset($_ENV['ADYEN_CURRENCY_CODE']) ? $_ENV['ADYEN_CURRENCY_CODE'] : 'GBP';
-$paymentAmount = isset($_ENV['ADYEN_AMOUNT']) ? $_ENV['ADYEN_AMOUNT'] : '20000';
+$paymentAmount = isset($_ENV['ADYEN_AMOUNT']) ? $_ENV['ADYEN_AMOUNT'] : '2000';
 
 /*
  payment-specific details
