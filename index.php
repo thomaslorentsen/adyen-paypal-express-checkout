@@ -61,11 +61,14 @@ $params = array(
 
     // Redirect url
     //"resultURL" => 'http://127.0.0.1:4747/callback.php'
+    //"resURL" => 'http://127.0.0.1:4747/callback.php'
 
 );
 
 if ($_POST) {
     $params = json_decode($_POST['data']);
+    $params["merchantSig"] = null;
+    $params = array_filter($params);
 }
 
 $params["merchantSig"] = adyen_hmac($hmacKey, $params);
