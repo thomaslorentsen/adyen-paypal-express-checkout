@@ -18,10 +18,6 @@ $paymentAmount = isset($_ENV['ADYEN_AMOUNT']) ? $_ENV['ADYEN_AMOUNT'] : '2000';
  payment-specific details
  */
 
-if ($_POST) {
-    $params = json_decode($_POST['data']);
-}
-
 $params = array(
     "merchantReference" => uniqid('SKINTEST-'),
     "merchantAccount"   => $merchantAccount,
@@ -63,7 +59,14 @@ $params = array(
     "deliveryAddress.country" => "NL",
     "deliveryAddressType" => "",
 
+    // Redirect url
+    //"resultURL" => 'http://127.0.0.1:4747/callback.php'
+
 );
+
+if ($_POST) {
+    $params = json_decode($_POST['data']);
+}
 
 $params["merchantSig"] = adyen_hmac($hmacKey, $params);
 
@@ -95,7 +98,7 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
     </div>
     <h2>Payload:</h2>
     <div>
-        <form method="POST" action="">
+        <form method="POST" action="/">
             <textarea name="data" style="height:600px;width:500px">
 <?php echo json_encode($params, JSON_PRETTY_PRINT); ?>
             </textarea>
