@@ -18,6 +18,10 @@ $paymentAmount = isset($_ENV['ADYEN_AMOUNT']) ? $_ENV['ADYEN_AMOUNT'] : '2000';
  payment-specific details
  */
 
+if ($_POST) {
+    $params = json_decode($_POST['data']);
+}
+
 $params = array(
     "merchantReference" => uniqid('SKINTEST-'),
     "merchantAccount"   => $merchantAccount,
@@ -91,9 +95,15 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
     </div>
     <h2>Payload:</h2>
     <div>
-        <textarea style="height:600px;width:500px">
+        <form method="POST" action="">
+            <textarea name="data" style="height:600px;width:500px">
 <?php echo json_encode($params, JSON_PRETTY_PRINT); ?>
-        </textarea>
+            </textarea>
+            <br />
+            <br />
+
+            <input type="submit" value="submit" />
+        </form>
     </div>
 </div>
 

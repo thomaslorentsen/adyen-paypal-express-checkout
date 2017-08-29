@@ -3,6 +3,7 @@ FROM php:7.0-apache
 LABEL maintainer "tom@thomaslorentsen.co.uk"
 
 COPY index.php /var/www/html/
+COPY callback.php /var/www/html/
 COPY composer.json /var/www/html/
 
 RUN apt-get update \
