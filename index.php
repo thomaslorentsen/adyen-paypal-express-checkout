@@ -61,12 +61,12 @@ $params = array(
 
     // Redirect url
     //"resultURL" => 'http://127.0.0.1:4747/callback.php'
-    //"resURL" => 'http://127.0.0.1:4747/callback.php'
+    "resURL" => 'http://127.0.0.1:4747/callback.php'
 
 );
 
 if ($_POST) {
-    $params = json_decode($_POST['data']);
+    $params = (array) json_decode($_POST['data']);
     $params["merchantSig"] = null;
     $params = array_filter($params);
 }
@@ -96,7 +96,7 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
                     '" value="' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . '" />' ."\n" ;
             }
             ?>
-            <input type="submit" value="submit" />
+            <input type="submit" value="Checkout" />
         </form>
     </div>
     <h2>Payload:</h2>
@@ -108,7 +108,7 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
             <br />
             <br />
 
-            <input type="submit" value="submit" />
+            <input type="submit" value="Update Payload" />
         </form>
     </div>
 </div>
