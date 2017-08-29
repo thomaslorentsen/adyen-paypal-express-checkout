@@ -6,10 +6,13 @@
 Adyen PayPal Express Checkout Proof of Concept
 
 
-# Building Docker
+# Running Container
 ```bash
-docker build -t adyen-paypal-express-checkout .
+docker pull imacatlol/adyen-paypal-express-checkout
 ```
+
+```ADYEN_SKINCODE```, ```ADYEN_MERCHANT``` and ```ADYEN_HMAC``` are mandatory environment values.
+
 ```bash
 docker run \
   -d -p 127.0.0.1:4747:80 \
@@ -17,6 +20,14 @@ docker run \
   -e ADYEN_SKINCODE="SkinCode" \
   -e ADYEN_MERCHANT="Merchant-Account" \
   -e ADYEN_HMAC="YOUR_HMAC_CODE" \
-  adyen-paypal-express-checkout
+  imacatlol/adyen-paypal-express-checkout
 open http://127.0.0.1:4747
+```
+
+# Optional Environment Vars
+```
+ADYEN_CURRENCY_CODE="GBP"
+```
+```
+ADYEN_AMOUNT="2000"
 ```

@@ -5,9 +5,14 @@
 
 require_once 'vendor/thomaslorentsen/adyen-hpp-hmac/src/hmac.php';
 
+// Mandatory Values
 $skinCode        = $_ENV['ADYEN_SKINCODE'];
 $merchantAccount = $_ENV['ADYEN_MERCHANT'];
 $hmacKey         = $_ENV['ADYEN_HMAC'];
+
+// Optional Values
+$currencyCode = isset($_ENV['ADYEN_CURRENCY_CODE']) ? $_ENV['ADYEN_CURRENCY_CODE'] : 'GBP';
+$paymentAmount = isset($_ENV['ADYEN_AMOUNT']) ? $_ENV['ADYEN_AMOUNT'] : '20000';
 
 /*
  payment-specific details
@@ -15,9 +20,9 @@ $hmacKey         = $_ENV['ADYEN_HMAC'];
 
 $params = array(
     "merchantReference" => uniqid('SKINTEST-'),
-    "merchantAccount"   =>  $merchantAccount,
-    "currencyCode"      => "GBP",
-    "paymentAmount"     => "2000",
+    "merchantAccount"   => $merchantAccount,
+    "currencyCode"      => $currencyCode,
+    "paymentAmount"     => $paymentAmount,
     "sessionValidity"   => "2020-12-25T10:31:06Z",
     "shipBeforeDate"    => "2017-08-25",
     "shopperLocale"     => "en_GB",
@@ -81,13 +86,13 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
                     '" value="' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . '" />' ."\n" ;
             }
             ?>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="submit" />
         </form>
     </div>
     <h2>Payload:</h2>
     <div>
         <textarea style="height:600px;width:500px">
-            <?php var_dump($params); ?>
+<?php echo json_encode($params, JSON_PRETTY_PRINT); ?>
         </textarea>
     </div>
 </div>
@@ -95,6 +100,7 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
 </body>
 </html>
 <!-- Adyen PayPal Express Checkout is running -->

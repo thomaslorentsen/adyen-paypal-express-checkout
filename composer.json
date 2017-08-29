@@ -17,6 +17,6 @@
     }
   ],
   "require": {
-    "thomaslorentsen/adyen-hpp-hmac": "dev-master"
+    "thomaslorentsen/adyen-hpp-hmac": "v0.0.1"
   }
 }
