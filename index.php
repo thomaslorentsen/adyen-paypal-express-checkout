@@ -76,9 +76,6 @@ if ($_POST) {
     $params["merchantSig"] = null;
     $params = array_filter($params);
 }
-if (!$params["paymentAmount"]) {
-    $params["paymentAmount"] = '0';
-}
 
 $params["merchantSig"] = adyen_hmac($hmacKey, $params);
 
