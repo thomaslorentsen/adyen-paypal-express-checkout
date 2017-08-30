@@ -25,9 +25,14 @@ open http://127.0.0.1:4747
 ```
 
 # Optional Environment Vars
-```
-ADYEN_CURRENCY_CODE="GBP"
-```
-```
-ADYEN_AMOUNT="2000"
-```
+Additional vars can be passed with ```-e``` to override the defaults:
+
+| param | var | default |
+| --- | --- | --- |
+| ```currencyCode``` | ```ADYEN_CURRENCY_CODE``` | ```GBP``` |
+| ```paymentAmount``` | ```ADYEN_AMOUNT``` | ```2000``` |
+| ```shopperEmail``` | ```ADYEN_SHOPPER_EMAIL``` | ```test@adyen.com``` |
+
+# Usage
+## Modifying The Payload
+Update the values in the text area and then submit ```update payload``` to set the values and generate a new HMAC.

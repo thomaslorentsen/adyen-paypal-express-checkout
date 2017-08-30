@@ -13,6 +13,7 @@ $hmacKey         = $_ENV['ADYEN_HMAC'];
 // Optional Values
 $currencyCode = isset($_ENV['ADYEN_CURRENCY_CODE']) ? $_ENV['ADYEN_CURRENCY_CODE'] : 'GBP';
 $paymentAmount = isset($_ENV['ADYEN_AMOUNT']) ? $_ENV['ADYEN_AMOUNT'] : '2000';
+$shopperEmail = isset($_ENV['ADYEN_SHOPPER_EMAIL']) ? $_ENV['ADYEN_SHOPPER_EMAIL'] : 'test@adyen.com';
 
 /*
  payment-specific details
@@ -28,7 +29,7 @@ $params = array(
     "shopperLocale"     => "en_GB",
     "skinCode"          => $skinCode,
     "brandCode"         => "paypal_ecs",
-    "shopperEmail"      => "test@adyen.com",
+    "shopperEmail"      => $shopperEmail,
     "shopperReference"  => "123",
 
     // Shopper information
@@ -67,6 +68,11 @@ $params = array(
 
 if ($_POST) {
     $params = (array) json_decode($_POST['data']);
+    $data = explode(PHP_EOL, $_POST['data']);
+    foreach ($data as $line) {
+        list($key, $value) = explode(":", $line, 2);
+        $params[$key] = $value;
+    }
     $params["merchantSig"] = null;
     $params = array_filter($params);
 }
@@ -103,7 +109,12 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
     <div>
         <form method="POST" action="/">
             <textarea name="data" style="height:600px;width:500px">
-<?php echo json_encode($params, JSON_PRETTY_PRINT); ?>
+<?php
+foreach ($params as $key => $value){
+    echo '' .htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8') .
+        ':' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . "\n" ;
+}
+?>
             </textarea>
             <br />
             <br />
