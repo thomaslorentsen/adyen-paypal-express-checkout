@@ -67,8 +67,8 @@ $params = array(
 );
 
 if ($_POST) {
-    $params = (array) json_decode($_POST['data']);
-    $data = explode(PHP_EOL, $_POST['data']);
+    $rawData = trim($_POST['data']);
+    $data = explode(PHP_EOL, $rawData);
     foreach ($data as $line) {
         $line = trim($line);
         list($key, $value) = explode(":", $line, 2);
