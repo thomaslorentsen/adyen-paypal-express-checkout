@@ -70,6 +70,7 @@ if ($_POST) {
     $params = (array) json_decode($_POST['data']);
     $data = explode(PHP_EOL, $_POST['data']);
     foreach ($data as $line) {
+        $line = trim($line);
         list($key, $value) = explode(":", $line, 2);
         $params[$key] = $value;
     }
@@ -112,7 +113,7 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
 <?php
 foreach ($params as $key => $value){
     echo '' .htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8') .
-        ':' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . "\n" ;
+        ':' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . PHP_EOL ;
 }
 ?>
             </textarea>
