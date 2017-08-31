@@ -11,6 +11,6 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "thomaslorentsen/adyen-hpp-hmac": "0.2.1"
+    "thomaslorentsen/adyen-hpp-hmac": "^0.2.1"
   }
 }
