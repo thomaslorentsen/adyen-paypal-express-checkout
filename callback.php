@@ -16,13 +16,13 @@
 <h1>Response:</h1>
 GET:<pre>
 <?php
-json_encode($_GET, JSON_PRETTY_PRINT);
+echo json_encode($_GET, JSON_PRETTY_PRINT);
 ?>
 </pre>
 
 POST:<pre>
 <?php
-json_encode($_POST, JSON_PRETTY_PRINT);
+echo json_encode($_POST, JSON_PRETTY_PRINT);
 ?>
 </pre>
 
