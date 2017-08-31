@@ -17,6 +17,6 @@
     }
   ],
   "require": {
-    "thomaslorentsen/adyen-hpp-hmac": "v0.0.1"
+    "thomaslorentsen/adyen-hpp-hmac": "v0.1.0"
   }
 }

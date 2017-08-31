@@ -13,7 +13,7 @@ var_dump($_POST);
 
 <?php
 
-require_once 'vendor/thomaslorentsen/adyen-hpp-hmac/src/hmac.php';
+require_once 'vendor/autoload.php';
 
 $hmacKey         = $_ENV['ADYEN_HMAC'];
 

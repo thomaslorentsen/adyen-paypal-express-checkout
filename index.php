@@ -3,7 +3,7 @@
  This PHP code provides a payment form for the Adyen Hosted Payment Pages
  */
 
-require_once 'vendor/thomaslorentsen/adyen-hpp-hmac/src/hmac.php';
+require_once 'vendor/autoload.php';
 
 // Mandatory Values
 $skinCode        = $_ENV['ADYEN_SKINCODE'];
