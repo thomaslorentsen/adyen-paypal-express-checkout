@@ -109,7 +109,7 @@ $params["merchantSig"] = adyen_hmac($hmacKey, $params);
     <h2>Payload:</h2>
     <div>
         <form method="POST" action="/">
-            <textarea name="data" style="height:600px;width:500px">
+            <textarea name="data" style="height:300px;width:500px">
 <?php
 foreach ($params as $key => $value){
     echo '' .htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8') .
