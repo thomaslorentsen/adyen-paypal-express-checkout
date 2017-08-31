@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Adyen Payment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+
+
 <h1>Response:</h1>
 GET:<pre>
 <?php
@@ -17,11 +32,10 @@ require_once 'vendor/autoload.php';
 
 $hmacKey         = $_ENV['ADYEN_HMAC'];
 
-$params = array_merge($_GET);
-$params["merchantSig"] = null;
-$params = array_filter($params);
-
-$signature = adyen_hmac($hmacKey, $params);
+$params = $_GET;
+$signatureValidator = adyen_hmac($hmacKey, $params);
+$signatureValidator = new \RoundPartner\Adyen\Signature($hmacKey);
+$signature = $signatureValidator->generate($params);
 
 ?>
 <h1><pre><?php echo $signature ?></pre></h1>
@@ -31,3 +45,6 @@ if ($signature == $_GET["merchantSig"]) { ?>
 <? } else { ?>
     This is an invalid response
 <? } ?>
+</div>
+</body>
+</html>

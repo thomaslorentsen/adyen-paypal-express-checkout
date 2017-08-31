@@ -74,11 +74,10 @@ if ($_POST) {
         list($key, $value) = explode(":", $line, 2);
         $params[$key] = $value;
     }
-    $params["merchantSig"] = null;
-    $params = array_filter($params);
 }
 
-$params["merchantSig"] = adyen_hmac($hmacKey, $params);
+$signature = new \RoundPartner\Adyen\Signature($hmacKey);
+$params["merchantSig"] = $signature->generate($params);
 
 ?>
 <!DOCTYPE html>
