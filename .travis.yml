@@ -26,11 +26,9 @@ script:
   - grep "Adyen PayPal Express Checkout is running" index.html
   - grep "mandatory_skin_code" index.html
   - grep "mandatory_merchant_account" index.html
-  - grep "mandatory_hmac" index.html
   - grep "custom_currency" index.html
   - grep "custom_amount" index.html
   - grep "custom_adyen_shopper_email" index.html
-  - grep "custom_res_url" index.html
   - docker ps | grep -q adyen-paypal-express-checkout
 
 after_failure:
