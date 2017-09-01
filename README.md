@@ -11,7 +11,7 @@ Once the payment has been taken the callback will display the returned result an
 ## Integration Notes
 
 - For this container to work you need to have PayPal Express Checkout enabled and have [Hosted Payment Pages](https://docs.adyen.com/developers/payment-methods/paypal) enabled to take PayPal payments.
-- This composer uses the [Adyen HMAC Validator](https://github.com/thomaslorentsen/adyen-hpp-hmac) library to calculate the signature
+- Container uses the [Adyen HMAC Validator](https://github.com/thomaslorentsen/adyen-hpp-hmac) library to calculate the signature
 
 # Running Container
 Pull the container from Docker Hub
@@ -49,5 +49,5 @@ Additional vars can be passed with ```-e``` to override the defaults:
 ## Modifying The Payload
 Update the values in the text area and then submit ```update payload``` to set the values and generate a new HMAC.
 ## Integration Guide
-This container is based on the [Sample HPP Create Payment](https://github.com/Adyen/adyen-php-sample-code/blob/master/1.HPP/SHA-256/create-payment-on-HPP-SHA256_advanced.php) example code.
+This container is based on the [HPP Create Payment](https://github.com/Adyen/adyen-php-sample-code/blob/master/1.HPP/SHA-256/create-payment-on-HPP-SHA256_advanced.php) sample code.
 
