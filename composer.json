@@ -10,6 +10,12 @@
     }
   ],
   "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/thomaslorentsen/php-future"
+    }
+  ],
   "require": {
     "thomaslorentsen/adyen-hpp-hmac": "^0.3.0"
   }
