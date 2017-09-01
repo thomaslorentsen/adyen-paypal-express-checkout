@@ -48,3 +48,6 @@ Additional vars can be passed with ```-e``` to override the defaults:
 # Usage
 ## Modifying The Payload
 Update the values in the text area and then submit ```update payload``` to set the values and generate a new HMAC.
+## Integration Guide
+This container is based on the [Sample HPP Create Payment](https://github.com/Adyen/adyen-php-sample-code/blob/master/1.HPP/SHA-256/create-payment-on-HPP-SHA256_advanced.php) example code.
+
