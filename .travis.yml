@@ -9,11 +9,28 @@ services:
 before_script:
   # Build docker image
   - docker build -t adyen-paypal-express-checkout .
-  - docker run -d -p 127.0.0.1:80:80 --name adyen-paypal-express-checkout adyen-paypal-express-checkout
+  - >
+      docker run -d
+        -e ADYEN_SKINCODE="mandatory_skin_code"
+        -e ADYEN_MERCHANT="mandatory_merchant_account"
+        -e ADYEN_HMAC="mandatory_hmac"
+        -e ADYEN_CURRENCY_CODE="custom_currency"
+        -e ADYEN_AMOUNT="custom_amount"
+        -e ADYEN_SHOPPER_EMAIL="custom_adyen_shopper_email"
+        -e ADYEN_RES_URL="custom_res_url"
+        -p 127.0.0.1:80:80
+        --name adyen-paypal-express-checkout adyen-paypal-express-checkout
 
 script:
   - wget --quiet 127.0.0.1:80
   - grep "Adyen PayPal Express Checkout is running" index.html
+  - grep "mandatory_skin_code" index.html
+  - grep "mandatory_merchant_account" index.html
+  - grep "mandatory_hmac" index.html
+  - grep "custom_currency" index.html
+  - grep "custom_amount" index.html
+  - grep "custom_adyen_shopper_email" index.html
+  - grep "custom_res_url" index.html
   - docker ps | grep -q adyen-paypal-express-checkout
 
 after_failure:

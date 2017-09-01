@@ -14,6 +14,7 @@ $hmacKey         = $_ENV['ADYEN_HMAC'];
 $currencyCode = isset($_ENV['ADYEN_CURRENCY_CODE']) ? $_ENV['ADYEN_CURRENCY_CODE'] : 'GBP';
 $paymentAmount = isset($_ENV['ADYEN_AMOUNT']) ? $_ENV['ADYEN_AMOUNT'] : '2000';
 $shopperEmail = isset($_ENV['ADYEN_SHOPPER_EMAIL']) ? $_ENV['ADYEN_SHOPPER_EMAIL'] : 'test@adyen.com';
+$resURL = isset($_ENV['ADYEN_RES_URL']) ? $_ENV['ADYEN_RES_URL'] : 'http://127.0.0.1:4747/callback.php';
 
 /*
  payment-specific details
@@ -25,7 +26,7 @@ $params = array(
     "currencyCode"      => $currencyCode,
     "paymentAmount"     => $paymentAmount,
     "sessionValidity"   => "2020-12-25T10:31:06Z",
-    "shipBeforeDate"    => "2017-08-25",
+    "shipBeforeDate"    => date("Y-m-d"),
     "shopperLocale"     => "en_GB",
     "skinCode"          => $skinCode,
     "brandCode"         => "paypal_ecs",
@@ -61,7 +62,6 @@ $params = array(
     "deliveryAddressType" => "",
 
     // Redirect url
-    //"resultURL" => 'http://127.0.0.1:4747/callback.php'
     "resURL" => 'http://127.0.0.1:4747/callback.php'
 
 );

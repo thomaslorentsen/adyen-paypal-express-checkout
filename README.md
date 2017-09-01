@@ -44,6 +44,7 @@ Additional vars can be passed with ```-e``` to override the defaults:
 | ```currencyCode``` | ```ADYEN_CURRENCY_CODE``` | ```GBP``` |
 | ```paymentAmount``` | ```ADYEN_AMOUNT``` | ```2000``` |
 | ```shopperEmail``` | ```ADYEN_SHOPPER_EMAIL``` | ```test@adyen.com``` |
+| ```resURL``` | ```ADYEN_RES_URL``` | ```http://127.0.0.1:4747/callback.php``` |
 
 # Usage
 ## Modifying The Payload
