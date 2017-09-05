@@ -25,8 +25,8 @@ $params = array(
     "merchantAccount"   => $merchantAccount,
     "currencyCode"      => $currencyCode,
     "paymentAmount"     => $paymentAmount,
-    "sessionValidity"   => "2020-12-25T10:31:06Z",
-    "shipBeforeDate"    => date("Y-m-d"),
+    "sessionValidity"   => date("Y-m-d\TH:i:s\Z", strtotime('+21 days')),
+    "shipBeforeDate"    => date("Y-m-d", strtotime('+7 days')),
     "shopperLocale"     => "en_GB",
     "skinCode"          => $skinCode,
     "brandCode"         => "paypal_ecs",
@@ -72,8 +72,15 @@ if ($_POST) {
     foreach ($data as $line) {
         $line = trim($line);
         list($key, $value) = explode(":", $line, 2);
+        if ('merchantSig' === $key) {
+            continue;
+        }
         $params[$key] = $value;
     }
+}
+
+if (!$params['paymentAmount'] && !isset($params["recurringContract"])) {
+    $params["recurringContract"] = 'RECURRING';
 }
 
 $signature = new \RoundPartner\Adyen\Signature($hmacKey);
@@ -117,6 +124,10 @@ foreach ($params as $key => $value){
 ?>
             </textarea>
             <br />
+            <!--<select name="recurringContract">
+                <option value="">NONE</option>
+                <option value="RECURRING">RECURRING</option>
+            </select><br />-->
             <br />
 
             <input type="submit" value="Update Payload" />

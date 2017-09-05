@@ -22,7 +22,11 @@ echo json_encode($_GET, JSON_PRETTY_PRINT);
 
 POST:<pre>
 <?php
-echo json_encode($_POST, JSON_PRETTY_PRINT);
+$post = $_POST;
+if (array_key_exists('payment_token', $post)) {
+    $post['payment_token'] = str_replace(["\n","\r"], ["",""], $post['payment_token']);
+}
+echo json_encode($post, JSON_PRETTY_PRINT);
 ?>
 </pre>
 
