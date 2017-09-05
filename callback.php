@@ -14,7 +14,7 @@
 
 <?php if (array_key_exists('payment_token', $_POST)) { ?>
 <h1>Token</h1>
-<textarea onfocus="this.select();" onmouseup="return false;"><?php echo $_POST['payment_token']; ?></textarea>
+<textarea onfocus="this.select();" onmouseup="return false;" style="height:300px;width:500px"><?php echo $_POST['payment_token']; ?></textarea>
 <?php } ?>
 
 <h1>Response:</h1>
