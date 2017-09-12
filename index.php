@@ -22,44 +22,19 @@ $resURL = isset($_ENV['ADYEN_RES_URL']) ? $_ENV['ADYEN_RES_URL'] : 'http://127.0
 
 $params = array(
     "merchantReference" => uniqid('SKINTEST-'),
-    "merchantAccount"   => $merchantAccount,
-    "currencyCode"      => $currencyCode,
+    "merchantAccount" => $merchantAccount,
+    "currencyCode" => $currencyCode,
     "paymentAmount"     => $paymentAmount,
-    "sessionValidity"   => date("Y-m-d\TH:i:s\Z", strtotime('+21 days')),
-    "shipBeforeDate"    => date("Y-m-d", strtotime('+7 days')),
-    "shopperLocale"     => "en_GB",
-    "skinCode"          => $skinCode,
-    "brandCode"         => "paypal_ecs",
-    "shopperEmail"      => $shopperEmail,
-    "shopperReference"  => "123",
+    "sessionValidity" => date("Y-m-d\TH:i:s\Z", strtotime('+21 days')),
+    "shipBeforeDate" => date("Y-m-d", strtotime('+7 days')),
+    "shopperLocale" => "en_GB",
+    "skinCode" => $skinCode,
+    "brandCode" => "paypal_ecs",
+    "shopperEmail" => $shopperEmail,
+    "shopperReference" => "123",
 
     // Shopper information
-    "shopper.firstName"=> "Testperson-nl",
-    "shopper.lastName"=> "Approved",
-    "shopper.dateOfBirthDayOfMonth"=> "10",
-    "shopper.dateOfBirthMonth"=> "07",
-    "shopper.dateOfBirthYear"=> "1970",
-    "shopper.gender"=> "MALE",
-    "shopper.telephoneNumber"=> "0104691602",
-    "shopperIP"=> "62.128.7.69",
-
-    // Billing Address fields (used for AVS checks)
-    "billingAddress.street" =>"Neherkade",
-    "billingAddress.houseNumberOrName" => "1",
-    "billingAddress.city" => "Gravenhage",
-    "billingAddress.postalCode" => "2521VA",
-    "billingAddress.stateOrProvince" => "NH",
-    "billingAddress.country" => "NL",
-    "billingAddressType" => "",
-
-    // Delivery/Shipping Address fields
-    "deliveryAddress.street" => "Neherkade",
-    "deliveryAddress.houseNumberOrName" => "1",
-    "deliveryAddress.city" => "Gravenhage",
-    "deliveryAddress.postalCode" => "2521VA",
-    "deliveryAddress.stateOrProvince" => "NH",
-    "deliveryAddress.country" => "NL",
-    "deliveryAddressType" => "",
+    "shopperIP" => "62.128.7.69",
 
     // Redirect url
     "resURL" => 'http://127.0.0.1:4747/callback.php'
