@@ -26,15 +26,15 @@ $params = array(
     "currencyCode" => $currencyCode,
     "paymentAmount"     => $paymentAmount,
     "sessionValidity" => date("Y-m-d\TH:i:s\Z", strtotime('+21 days')),
-    "shipBeforeDate" => date("Y-m-d", strtotime('+7 days')),
+    //"shipBeforeDate" => date("Y-m-d", strtotime('+7 days')),
     "shopperLocale" => "en_GB",
     "skinCode" => $skinCode,
     "brandCode" => "paypal_ecs",
-    "shopperEmail" => $shopperEmail,
-    "shopperReference" => "123",
+    //"shopperEmail" => $shopperEmail,
+    //"shopperReference" => "123",
 
     // Shopper information
-    "shopperIP" => "62.128.7.69",
+    //"shopperIP" => "62.128.7.69",
 
     // Redirect url
     "resURL" => 'http://127.0.0.1:4747/callback.php'

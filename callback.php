@@ -46,13 +46,13 @@ $signatureValidator = new \RoundPartner\Adyen\Signature($hmacKey);
 $signature = $signatureValidator->generate($params);
 
 ?>
-<h1><pre><?php echo $signature ?></pre></h1>
-<?php
+<h1><?php
 if ($signature == $_GET["merchantSig"]) { ?>
     This is a valid response
 <? } else { ?>
     This is an invalid response
-<? } ?>
+<? } ?></h1>
+<pre><?php echo $signature ?></pre>
 </div>
 </body>
 </html>
