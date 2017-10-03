@@ -30,7 +30,7 @@ $params = array(
     "shopperLocale" => "en_GB",
     "skinCode" => $skinCode,
     "brandCode" => "paypal_ecs",
-    //"shopperEmail" => $shopperEmail,
+    "shopperEmail" => $shopperEmail,
     //"shopperReference" => "123",
 
     // Shopper information
