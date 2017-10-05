@@ -17,6 +17,7 @@
     }
   ],
   "require": {
-    "thomaslorentsen/adyen-hpp-hmac": "^0.3.0"
+    "thomaslorentsen/adyen-hpp-hmac": "^0.3.0",
+    "guzzlehttp/guzzle": "^6.3"
   }
 }
