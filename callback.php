@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="container">
+    <a class="btn" href="/">Go Back</a>
 
 <?php if (array_key_exists('payment_token', $_POST)) { ?>
 <h1>Token</h1>

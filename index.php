@@ -68,6 +68,11 @@ if (isset($_GET['get']) && $_GET['get'] === 'redirect') {
     $response = $client->post('/hpp/skipDetails.shtml', ['form_params' => $params, 'allow_redirects' => false]);
     $responseHeaders = $response->getHeaders();
     $responseBody = $response->getBody()->getContents();
+    if (isset($responseHeaders['Set-Cookie'])) {
+        foreach ($responseHeaders['Set-Cookie'] as $header) {
+            header('Set-Cookie: ' . $header);
+        }
+    }
 }
 
 ?>
@@ -124,7 +129,7 @@ foreach ($params as $key => $value){
         }
         if (isset($responseHeaders['Location'][0])) {
             echo '<h3>Redirect Url</h3>';
-            echo '<input value="' . $responseHeaders['Location'][0] . '" style="width: 500px" /><br />';
+            echo '<input value="' . $responseHeaders['Location'][0] . '" onfocus="this.select();" onmouseup="return false;" style="width: 500px" /><br />';
         }
         if (isset($responseBody) && $responseBody) {
             echo '<h3>Body</h3>';
@@ -132,6 +137,7 @@ foreach ($params as $key => $value){
         }
         ?>
     </div>
+    <br />
     <br />
     <h2>Payload:</h2>
     <p>Update the payload by changing the values below</p>
