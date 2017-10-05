@@ -61,6 +61,15 @@ if (!$params['paymentAmount'] && !isset($params["recurringContract"])) {
 $signature = new \RoundPartner\Adyen\Signature($hmacKey);
 $params["merchantSig"] = $signature->generate($params);
 
+
+use GuzzleHttp\Client;
+if (isset($_GET['get']) && $_GET['get'] === 'redirect') {
+    $client = new Client(['base_uri' => 'https://test.adyen.com']);
+    $response = $client->post('/hpp/skipDetails.shtml', ['form_params' => $params, 'allow_redirects' => false]);
+    $responseHeaders = $response->getHeaders();
+    $responseBody = $response->getBody()->getContents();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,6 +85,7 @@ $params["merchantSig"] = $signature->generate($params);
 <body>
 <div class="container">
     <h1>PayPal Express Checkout</h1>
+    <p>Posts a form to adyen and automatically redirects to PayPal</p>
     <div>
         <form name="adyenForm" action="https://test.adyen.com/hpp/skipDetails.shtml" method="post">
             <?php
@@ -87,7 +97,44 @@ $params["merchantSig"] = $signature->generate($params);
             <input type="submit" value="Checkout" />
         </form>
     </div>
+    <br />
+    <h2>Redirect</h2>
+    <p>Posts a request to Adyen and gets the PayPal redirect url</p>
+    <div>
+        <form name="adyenForm" action="/?get=redirect" method="post">
+                        <textarea name="data" style="height:300px;width:500px;display:none;">
+<?php
+foreach ($params as $key => $value){
+    echo '' .htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8') .
+        ':' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . PHP_EOL ;
+}
+?>
+            </textarea>
+            <input type="submit" value="Get Redirect Url" />
+        </form>
+        <?php
+        if (isset($responseHeaders)) {
+            //echo '<pre>'.json_encode($responseHeaders, JSON_PRETTY_PRINT).'</pre>';
+        }
+        if (isset($responseHeaders['Set-Cookie'])) {
+            echo '<h3>Cookies</h3>';
+            foreach($responseHeaders['Set-Cookie'] as $header) {
+                echo '<input value="' . htmlentities($header) . '" style="width: 500px" /><br />';
+            }
+        }
+        if (isset($responseHeaders['Location'][0])) {
+            echo '<h3>Redirect Url</h3>';
+            echo '<input value="' . $responseHeaders['Location'][0] . '" style="width: 500px" /><br />';
+        }
+        if (isset($responseBody) && $responseBody) {
+            echo '<h3>Body</h3>';
+            echo '<p>'.htmlentities($responseBody).'</p>';
+        }
+        ?>
+    </div>
+    <br />
     <h2>Payload:</h2>
+    <p>Update the payload by changing the values below</p>
     <div>
         <form method="POST" action="/">
             <textarea name="data" style="height:300px;width:500px">
