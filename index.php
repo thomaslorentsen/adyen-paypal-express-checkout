@@ -42,6 +42,7 @@ $params = array(
 );
 
 if ($_POST) {
+    $params = [];
     $rawData = trim($_POST['data']);
     $data = explode(PHP_EOL, $rawData);
     foreach ($data as $line) {
@@ -95,8 +96,8 @@ if (isset($_GET['get']) && $_GET['get'] === 'redirect') {
         <form name="adyenForm" action="https://test.adyen.com/hpp/skipDetails.shtml" method="post">
             <?php
             foreach ($params as $key => $value){
-                echo '<input type="hidden" name="' .htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8').
-                    '" value="' .htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . '" />' ."\n" ;
+                echo '<input type="hidden" name="' . htmlspecialchars($key,   ENT_COMPAT | ENT_HTML401 ,'UTF-8') .
+                    '" value="' . htmlspecialchars($value, ENT_COMPAT | ENT_HTML401 ,'UTF-8') . '" />' . PHP_EOL ;
             }
             ?>
             <input type="submit" value="Checkout" />
